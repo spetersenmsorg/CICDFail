@@ -1,6 +1,10 @@
 {
   "country": "us",
-  "appFolders": [],
+  "appFolders": [
+    "./app1"
+  ],
   "testFolders": [],
-  "bcptTestFolders": []
+  "bcptTestFolders": [],
+  "pageScriptingTests": [],
+  "artifact": "//*//latest"
 }
