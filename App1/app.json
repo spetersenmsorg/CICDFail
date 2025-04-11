@@ -15,7 +15,13 @@
       "id": "10cb69d9-bc8a-4d27-970a-9e110e9db2a5",
       "publisher": "Microsoft",
       "name": "_Exclude_APIV2_",
-      "version": "23.0.0.0"
+      "version": "25.0.0.0"
+    },
+    {
+      "id": "7a129d06-5fd6-4fb6-b82b-0bf539c779d0",
+      "publisher": "Microsoft",
+      "name": "_Exclude_Bank Deposits",
+      "version": "25.0.0.0"
     }
   ],
   "screenshots": [],
