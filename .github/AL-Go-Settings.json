@@ -1,6 +1,6 @@
 {
   "type": "PTE",
-  "templateUrl": "https://github.com/microsoft/AL-Go-PTE@main",
+  "templateUrl": "https://github.com/spetersenms/AL-Go@CICDFailFix",
   "DeployTospetersen_demo": {
     "Branches": [
       "*"
@@ -8,5 +8,6 @@
     "includeTestAppsInSandboxEnvironment": false,
     "excludeAppIds": []
   },
-  "generateDependencyArtifact": true
+  "generateDependencyArtifact": true,
+  "templateSha": "a268f38275867d42508070286d24bdcfcaa24b49"
 }
