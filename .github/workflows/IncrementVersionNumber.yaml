@@ -45,7 +45,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Dump Workflow Information
-        uses: spetersenms/AL-Go/Actions/DumpWorkflowInfo@CICDFailFix
+        uses: spetersenms/AL-Go/Actions/DumpWorkflowInfo@TestDebug
         with:
           shell: powershell
 
@@ -54,18 +54,18 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: spetersenms/AL-Go/Actions/WorkflowInitialize@CICDFailFix
+        uses: spetersenms/AL-Go/Actions/WorkflowInitialize@TestDebug
         with:
           shell: powershell
 
       - name: Read settings
-        uses: spetersenms/AL-Go/Actions/ReadSettings@CICDFailFix
+        uses: spetersenms/AL-Go/Actions/ReadSettings@TestDebug
         with:
           shell: powershell
 
       - name: Read secrets
         id: ReadSecrets
-        uses: spetersenms/AL-Go/Actions/ReadSecrets@CICDFailFix
+        uses: spetersenms/AL-Go/Actions/ReadSecrets@TestDebug
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -73,7 +73,7 @@ jobs:
           useGhTokenWorkflowForPush: '${{ github.event.inputs.useGhTokenWorkflow }}'
 
       - name: Increment Version Number
-        uses: spetersenms/AL-Go/Actions/IncrementVersionNumber@CICDFailFix
+        uses: spetersenms/AL-Go/Actions/IncrementVersionNumber@TestDebug
         with:
           shell: powershell
           token: ${{ steps.ReadSecrets.outputs.TokenForPush }}
@@ -84,7 +84,7 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: spetersenms/AL-Go/Actions/WorkflowPostProcess@CICDFailFix
+        uses: spetersenms/AL-Go/Actions/WorkflowPostProcess@TestDebug
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:

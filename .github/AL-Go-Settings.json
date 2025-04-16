@@ -1,6 +1,6 @@
 {
   "type": "PTE",
-  "templateUrl": "https://github.com/spetersenms/AL-Go@CICDFailFix",
+  "templateUrl": "https://github.com/spetersenms/AL-Go@TestDebug",
   "DeployTospetersen_demo": {
     "Branches": [
       "*"
@@ -9,5 +9,5 @@
     "excludeAppIds": []
   },
   "generateDependencyArtifact": true,
-  "templateSha": "a268f38275867d42508070286d24bdcfcaa24b49"
+  "templateSha": "423ce19e196c97781b50d6ac7e18fbdaab1343c8"
 }
