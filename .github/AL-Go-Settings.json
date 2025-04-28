@@ -5,7 +5,7 @@
     "Branches": [
       "*"
     ],
-    "includeTestAppsInSandboxEnvironment": false,
+    "includeTestAppsInSandboxEnvironment": true,
     "excludeAppIds": []
   },
   "generateDependencyArtifact": true,
