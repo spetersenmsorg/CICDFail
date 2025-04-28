@@ -48,7 +48,7 @@ jobs:
       powerPlatformSolutionFolder: ${{ steps.DeterminePowerPlatformSolutionFolder.outputs.powerPlatformSolutionFolder }}
     steps:
       - name: Dump Workflow Information
-        uses: spetersenms/AL-Go/Actions/DumpWorkflowInfo@TestDebug
+        uses: spetersenms/AL-Go/Actions/DumpWorkflowInfo@DeployToAsEnvVariable
         with:
           shell: powershell
 
@@ -59,13 +59,13 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: spetersenms/AL-Go/Actions/WorkflowInitialize@TestDebug
+        uses: spetersenms/AL-Go/Actions/WorkflowInitialize@DeployToAsEnvVariable
         with:
           shell: powershell
 
       - name: Read settings
         id: ReadSettings
-        uses: spetersenms/AL-Go/Actions/ReadSettings@TestDebug
+        uses: spetersenms/AL-Go/Actions/ReadSettings@DeployToAsEnvVariable
         with:
           shell: powershell
           get: type,powerPlatformSolutionFolder,useGitSubmodules
@@ -73,7 +73,7 @@ jobs:
       - name: Read submodules token
         id: ReadSubmodulesToken
         if: env.useGitSubmodules != 'false' && env.useGitSubmodules != ''
-        uses: spetersenms/AL-Go/Actions/ReadSecrets@TestDebug
+        uses: spetersenms/AL-Go/Actions/ReadSecrets@DeployToAsEnvVariable
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -94,7 +94,7 @@ jobs:
 
       - name: Determine Projects To Build
         id: determineProjectsToBuild
-        uses: spetersenms/AL-Go/Actions/DetermineProjectsToBuild@TestDebug
+        uses: spetersenms/AL-Go/Actions/DetermineProjectsToBuild@DeployToAsEnvVariable
         with:
           shell: powershell
           maxBuildDepth: ${{ env.workflowDepth }}
@@ -107,7 +107,7 @@ jobs:
 
       - name: Determine Delivery Target Secrets
         id: DetermineDeliveryTargetSecrets
-        uses: spetersenms/AL-Go/Actions/DetermineDeliveryTargets@TestDebug
+        uses: spetersenms/AL-Go/Actions/DetermineDeliveryTargets@DeployToAsEnvVariable
         with:
           shell: powershell
           projectsJson: '${{ steps.determineProjectsToBuild.outputs.ProjectsJson }}'
@@ -115,7 +115,7 @@ jobs:
 
       - name: Read secrets
         id: ReadSecrets
-        uses: spetersenms/AL-Go/Actions/ReadSecrets@TestDebug
+        uses: spetersenms/AL-Go/Actions/ReadSecrets@DeployToAsEnvVariable
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -123,7 +123,7 @@ jobs:
 
       - name: Determine Delivery Targets
         id: DetermineDeliveryTargets
-        uses: spetersenms/AL-Go/Actions/DetermineDeliveryTargets@TestDebug
+        uses: spetersenms/AL-Go/Actions/DetermineDeliveryTargets@DeployToAsEnvVariable
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
         with:
@@ -133,7 +133,7 @@ jobs:
 
       - name: Determine Deployment Environments
         id: DetermineDeploymentEnvironments
-        uses: spetersenms/AL-Go/Actions/DetermineDeploymentEnvironments@TestDebug
+        uses: spetersenms/AL-Go/Actions/DetermineDeploymentEnvironments@DeployToAsEnvVariable
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -149,21 +149,21 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Read settings
-        uses: spetersenms/AL-Go/Actions/ReadSettings@TestDebug
+        uses: spetersenms/AL-Go/Actions/ReadSettings@DeployToAsEnvVariable
         with:
           shell: powershell
           get: templateUrl
 
       - name: Read secrets
         id: ReadSecrets
-        uses: spetersenms/AL-Go/Actions/ReadSecrets@TestDebug
+        uses: spetersenms/AL-Go/Actions/ReadSecrets@DeployToAsEnvVariable
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
           getSecrets: 'ghTokenWorkflow'
 
       - name: Check for updates to AL-Go system files
-        uses: spetersenms/AL-Go/Actions/CheckForUpdates@TestDebug
+        uses: spetersenms/AL-Go/Actions/CheckForUpdates@DeployToAsEnvVariable
         with:
           shell: powershell
           templateUrl: ${{ env.templateUrl }}
@@ -217,7 +217,7 @@ jobs:
           path: '.artifacts'
 
       - name: Read settings
-        uses: spetersenms/AL-Go/Actions/ReadSettings@TestDebug
+        uses: spetersenms/AL-Go/Actions/ReadSettings@DeployToAsEnvVariable
         with:
           shell: powershell
 
@@ -226,7 +226,7 @@ jobs:
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
 
       - name: Build Reference Documentation
-        uses: spetersenms/AL-Go/Actions/BuildReferenceDocumentation@TestDebug
+        uses: spetersenms/AL-Go/Actions/BuildReferenceDocumentation@DeployToAsEnvVariable
         with:
           shell: powershell
           artifacts: '.artifacts'
@@ -263,10 +263,11 @@ jobs:
           path: '.artifacts'
 
       - name: Read settings
-        uses: spetersenms/AL-Go/Actions/ReadSettings@TestDebug
+        uses: spetersenms/AL-Go/Actions/ReadSettings@DeployToAsEnvVariable
         with:
           shell: ${{ matrix.shell }}
           get: type,powerPlatformSolutionFolder
+          environmentName: ${{ matrix.environment }}
 
       - name: EnvName
         id: envName
@@ -277,7 +278,7 @@ jobs:
 
       - name: Read secrets
         id: ReadSecrets
-        uses: spetersenms/AL-Go/Actions/ReadSecrets@TestDebug
+        uses: spetersenms/AL-Go/Actions/ReadSecrets@DeployToAsEnvVariable
         with:
           shell: ${{ matrix.shell }}
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -285,7 +286,7 @@ jobs:
 
       - name: Deploy to Business Central
         id: Deploy
-        uses: spetersenms/AL-Go/Actions/Deploy@TestDebug
+        uses: spetersenms/AL-Go/Actions/Deploy@DeployToAsEnvVariable
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
         with:
@@ -297,7 +298,7 @@ jobs:
 
       - name: Deploy to Power Platform
         if: env.type == 'PTE' && env.powerPlatformSolutionFolder != ''
-        uses: spetersenms/AL-Go/Actions/DeployPowerPlatform@TestDebug
+        uses: spetersenms/AL-Go/Actions/DeployPowerPlatform@DeployToAsEnvVariable
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
         with:
@@ -325,20 +326,20 @@ jobs:
           path: '.artifacts'
 
       - name: Read settings
-        uses: spetersenms/AL-Go/Actions/ReadSettings@TestDebug
+        uses: spetersenms/AL-Go/Actions/ReadSettings@DeployToAsEnvVariable
         with:
           shell: powershell
 
       - name: Read secrets
         id: ReadSecrets
-        uses: spetersenms/AL-Go/Actions/ReadSecrets@TestDebug
+        uses: spetersenms/AL-Go/Actions/ReadSecrets@DeployToAsEnvVariable
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
           getSecrets: '${{ matrix.deliveryTarget }}Context'
 
       - name: Deliver
-        uses: spetersenms/AL-Go/Actions/Deliver@TestDebug
+        uses: spetersenms/AL-Go/Actions/Deliver@DeployToAsEnvVariable
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
         with:
@@ -358,7 +359,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: spetersenms/AL-Go/Actions/WorkflowPostProcess@TestDebug
+        uses: spetersenms/AL-Go/Actions/WorkflowPostProcess@DeployToAsEnvVariable
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:

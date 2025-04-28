@@ -1,6 +1,6 @@
 {
   "type": "PTE",
-  "templateUrl": "https://github.com/spetersenms/AL-Go@TestDebug",
+  "templateUrl": "https://github.com/spetersenms/AL-Go@DeployToAsEnvVariable",
   "DeployTospetersen_demo": {
     "Branches": [
       "*"
@@ -9,5 +9,5 @@
     "excludeAppIds": []
   },
   "generateDependencyArtifact": true,
-  "templateSha": "22dbd9333370d3240ee9b8f26477abc3e270671b"
+  "templateSha": "d691904fa2b814a70b67e809f9d36f3f206002ff"
 }
