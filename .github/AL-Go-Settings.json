@@ -1,6 +1,6 @@
 {
   "type": "PTE",
-  "templateUrl": "https://github.com/spetersenms/AL-Go@DeployToEnvVar",
+  "templateUrl": "https://github.com/spetersenms/AL-Go@removedUnusedVar",
   "DeployTospetersen_demo": {
     "Branches": [
       "*"
@@ -9,5 +9,5 @@
     "excludeAppIds": []
   },
   "generateDependencyArtifact": true,
-  "templateSha": "3647d97edc383def86670e5cf42260b10f3860aa"
+  "templateSha": "0e3cb93659c31c3867efe52548dd2e066e2bba38"
 }
