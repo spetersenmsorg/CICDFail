@@ -30,7 +30,7 @@ jobs:
           lfs: true
 
       - name: Troubleshooting
-        uses: spetersenms/AL-Go/Actions/Troubleshooting@removedUnusedVar
+        uses: spetersenms/AL-Go/Actions/Troubleshooting@ExtendedDebugLogging
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
