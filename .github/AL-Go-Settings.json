@@ -9,5 +9,6 @@
     "excludeAppIds": []
   },
   "generateDependencyArtifact": true,
-  "templateSha": "3fd68e6af71f9773fd45381498e9b993aa89efd2"
+  "templateSha": "3fd68e6af71f9773fd45381498e9b993aa89efd2",
+  "$schema": "https://raw.githubusercontent.com/spetersenms/AL-Go/ExtendedDebugLogging/Actions/settings.schema.json"
 }

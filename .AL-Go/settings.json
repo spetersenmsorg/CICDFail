@@ -6,5 +6,6 @@
   "testFolders": [],
   "bcptTestFolders": [],
   "pageScriptingTests": [],
-  "artifact": "//*//latest"
+  "artifact": "//*//latest",
+  "$schema": "https://raw.githubusercontent.com/spetersenms/AL-Go/ExtendedDebugLogging/Actions/settings.schema.json"
 }
